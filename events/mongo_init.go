@@ -60,8 +60,10 @@ func InsertMockMongo(mgTable *mongo.Collection) (*mongo.Collection, error) {
 		FruitID:      1,
 		RsCustomerID: "2",
 		// Name:         "Test",
-		DateBought:       time.Now(),
+		Origin:           "ON, Canada",
+		DateArrived:      time.Now(),
 		DateSold:         time.Now().Add(2),
+		DeviceID:         1111,
 		SalePrice:        3.00,
 		OriginalWeight:   1.00,
 		SalesWeight:      0.75,
@@ -79,51 +81,4 @@ func InsertMockMongo(mgTable *mongo.Collection) (*mongo.Collection, error) {
 	log.Println(insertResult)
 	return mgTable, nil
 
-}
-
-// type aggQuery struct {
-// 	AggregateVersion int64
-// 	AggregateID      int64
-// }
-
-// func GetMaxAggregateVersion(mgTable *mongo.Collection, aggregateID int64) (int64, error) {
-// 	var aggregateVersion int64
-
-// 	versionDocument, err := mgTable.Find(&model.Inventory{
-// 		AggregateVersion: int64(10),
-// 		AggregateID:      aggregateID,
-// 	})
-// 	if err != nil {
-// 		err = errors.Wrap(err, "Error in retrieve version column")
-// 		log.Println(err)
-// 		// return nil, err
-// 	}
-
-// 	// fmt.Println(versionDocument)
-
-// 	for _, r := range versionDocument {
-// 		inventoryItems := r.(*model.Inventory)
-// 		aggregateVersion = inventoryItems.AggregateVersion
-// 	}
-
-// 	//
-// 	// aggregateVersion = 10
-
-// 	return aggregateVersion, nil
-// 	// return versionDocument, nil
-// }
-
-func StartMongo() *mongo.Collection {
-	mgTable, err := InitMongo()
-	if err != nil {
-		err = errors.Wrap(err, "Unable to get Mongo collection")
-		log.Println(ErrorStackTrace(err))
-	}
-
-	mgTable, err = InsertMockMongo(mgTable)
-	if err != nil {
-		err = errors.Wrap(err, "Unable to insert in mongo")
-		log.Println(ErrorStackTrace(err))
-	}
-	return mgTable
 }

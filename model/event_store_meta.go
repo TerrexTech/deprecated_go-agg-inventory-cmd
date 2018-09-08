@@ -1,5 +1,6 @@
 package model
 
+//EventStoreMeta is the middle cassandra db
 type EventStoreMeta struct {
 	// AggregateVersion tracks the version to be used
 	// by new events for that aggregate.

@@ -6,6 +6,7 @@ import (
 
 	cs "github.com/TerrexTech/go-cassandrautils/cassandra"
 	"github.com/bhupeshbhatia/go-agg-inventory-cmd/events"
+	"github.com/bhupeshbhatia/go-agg-inventory-cmd/service"
 	"github.com/joho/godotenv"
 	"github.com/pkg/errors"
 )
@@ -24,40 +25,81 @@ func main() {
 	}
 
 	//For Event store persistent
-	callBigCass() //NEED TO COMMENT EVERYTHING TO LOAD PERSISTANT DB.
-	// otherwise you will get 4 values in cassandra.
+	// err := callBigCass() //NEED TO COMMENT EVERYTHING TO LOAD PERSISTANT DB.
+	// // otherwise you will get 4 values in cassandra.
+	// if err != nil {
+	// 	err = errors.Wrap(err, "Unable to connect to big Cass")
+	// }
 
-	//FOR MIDDLE CASS
-	metaTable := callMiddleCass()
+	// //FOR MIDDLE CASS
+	// err = callMiddleCass()
+	// if err != nil {
+	// 	err = errors.Wrap(err, "Unable to connect to middle Cass")
+	// }
 
-	preMetaVersion := 13
+	// preMetaVersion := 13
 
-	metaVersion, err := events.GetVersion(metaTable, int64(preMetaVersion))
-	if err != nil {
-		err = errors.Wrap(err,
-			"Unable to find event version",
-		)
-		log.Println(ErrorStackTrace(err))
-	}
-	fmt.Println(metaVersion)
+	// metaVersion, err := events.GetVersion(int64(preMetaVersion))
+	// if err != nil {
+	// 	err = errors.Wrap(err, "Unable to find event version")
+	// 	log.Println(ErrorStackTrace(err))
+	// }
+	// fmt.Println(metaVersion)
 
 	//MONGO
 	aggVersion := callMongo()
-	aggOutOfSync := events.IsAggOutOfSync(metaVersion, aggVersion)
-	if aggOutOfSync {
-		events.GetAllPastEvents(aggVersion, metaVersion, tableForGettingEvents())
-	} else {
-		fmt.Println("Unable to get past events")
-	}
+	fmt.Println("aggregate_version: ", aggVersion)
 
-	//Compare aggregate and Event-meta
+	//CHECK IF VERSIONS ARE DIFFERENT
+	// 	aggOutOfSync := events.IsAggOutOfSync(metaVersion, aggVersion)
+	// 	if aggOutOfSync {
+	// 		// events.GetAllPastEvents(aggVersion, metaVersion, tableForGettingEvents())
+
+	// 		//FOR NOW USING MOCK DATA
+	// 		//calling mongo and passing mock data
+	// 		mockEvent, err := events.MockPastEventsData()
+	// 		if err != nil {
+	// 			err = errors.Wrap(err,
+	// 				"Unable to find event version",
+	// 			)
+	// 			log.Println(ErrorStackTrace(err))
+	// 		}
+
+	// 		for i := range mockEvent {
+	// 			events.AggOperations(mockEvent[i])
+	// 		}
+
+	// 		//Call InsertAgg in Mongo
+
+	// 	} else {
+	// 		fmt.Println("Unable to get past events")
+	// 	}
+
+	//Calling inventory service
+	insertResult, err := service.AddFoodItem([]byte(service.FoodProduct))
+	if err != nil {
+		err = errors.Wrap(err, "Unable to find event version")
+		log.Println(ErrorStackTrace(err))
+	}
+	fmt.Println(insertResult)
 
 }
 
 func callMongo() int64 {
 	// AGGREGATE_ID
 	var aggregateID int64 = 1
-	mgTable := events.StartMongo()
+	mgTable, err := events.InitMongo()
+	if err != nil {
+		err = errors.Wrap(err, "Unable to get Mongo collection")
+		log.Println(ErrorStackTrace(err))
+	}
+
+	// mgTable, err = events.InsertMockMongo(mgTable)
+	// if err != nil {
+	// 	err = errors.Wrap(err, "Unable to insert in mongo")
+	// 	log.Println(ErrorStackTrace(err))
+	// }
+
 	aggVersion, err := events.GetMaxAggregateVersion(mgTable, aggregateID)
 	if err != nil {
 		err = errors.Wrap(err, "Mongo version not received")
@@ -66,36 +108,41 @@ func callMongo() int64 {
 	return aggVersion
 }
 
-func callBigCass() {
+func callBigCass() error {
 	tableDef := events.PersistentStoreDefinition()
 	csTable, err := events.InitCassandra(tableDef, "rns_eventstore")
 	if err != nil {
 		err = errors.Wrap(err, "Cassandra table not initialized")
 		log.Println(ErrorStackTrace(err))
+		return err
 	}
 
 	csTable, err = events.InsertMockPersist(*csTable)
 	if err != nil {
 		err = errors.Wrap(err, "Cassandra table not initialized")
 		log.Println(ErrorStackTrace(err))
+		return err
 	}
+	return nil
 }
 
-func callMiddleCass() *cs.Table {
+func callMiddleCass() error {
 	tableDef := events.EventMetaDefinition()
 
 	csTable, err := events.InitCassandra(tableDef, "rns_meta")
 	if err != nil {
 		err = errors.Wrap(err, "Cassandra table not initialized")
 		log.Println(ErrorStackTrace(err))
+		return err
 	}
 
 	csTable, err = events.InsertMockMeta(*csTable)
 	if err != nil {
 		err = errors.Wrap(err, "Cassandra table not initialized")
 		log.Println(ErrorStackTrace(err))
+		return err
 	}
-	return csTable
+	return nil
 }
 
 func tableForGettingEvents() *cs.Table {

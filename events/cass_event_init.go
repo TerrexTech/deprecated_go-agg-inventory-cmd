@@ -165,12 +165,12 @@ func PersistentStoreDefinition() *map[string]cs.TableColumn {
 	return tableDef
 }
 
-func MockDataPersist() []PersistStore {
+func MockDataPersist() ([]PersistStore, error) {
 
 	genUUID, err := cql.RandomUUID()
 	if err != nil {
 		err = errors.Wrapf(err, "Error generating UUID")
-		return nil
+		return nil, err
 	}
 	mockEvent := []PersistStore{
 		PersistStore{
@@ -195,13 +195,17 @@ func MockDataPersist() []PersistStore {
 		},
 	}
 
-	return mockEvent
+	return mockEvent, err
 }
 
 //NEED TO REMOVE THIS
 func InsertMockPersist(csTable cs.Table) (*cs.Table, error) {
 
-	mockEvent := MockDataPersist()
+	mockEvent, err := MockDataPersist()
+	if err != nil {
+		err = errors.Wrap(err, "Error generating big Cass data")
+		return nil, err
+	}
 
 	for _, v := range mockEvent {
 		err := <-csTable.AsyncInsert(v)
@@ -241,4 +245,158 @@ func InsertMockPersist(csTable cs.Table) (*cs.Table, error) {
 // 	return newVersion, nil
 // }
 
+type MockEvent struct {
+	Action      string
+	Data        model.Inventory
+	Timestamp   time.Time
+	UserID      int
+	UUID        cql.UUID
+	YearBucket  uint16
+	Version     int64
+	AggregateID int64
+}
+
 //MOCK DATA FOR PAST EVENTS
+func MockPastEventsData() ([]MockEvent, error) {
+
+	genUUID, err := cql.RandomUUID()
+	if err != nil {
+		err = errors.Wrap(err, "Error generating UUID")
+		return nil, err
+	}
+
+	m := []MockEvent{
+		MockEvent{
+			Action: "update",
+			Data: model.Inventory{
+				FruitID:      2,
+				RsCustomerID: "3",
+				// Name:         "Test",
+				Origin:           "QC, Canada",
+				DateArrived:      time.Now(),
+				DateSold:         time.Now().Add(2),
+				DeviceID:         2222,
+				SalePrice:        3.00,
+				OriginalWeight:   1.00,
+				SalesWeight:      0.75,
+				WasteWeight:      1000,
+				DonateWeight:     0,
+				AggregateVersion: 11,
+				AggregateID:      2,
+			},
+			Timestamp:   time.Now(),
+			UserID:      1,
+			UUID:        genUUID,
+			YearBucket:  2018,
+			Version:     11,
+			AggregateID: 1,
+		},
+		MockEvent{
+			Action: "insert",
+			Data: model.Inventory{
+				FruitID:      3,
+				RsCustomerID: "3",
+				// Name:         "Test",
+				Origin:           "ON, Canada",
+				DateArrived:      service.Now(),
+				DateSold:         time.Now().Add(20),
+				DeviceID:         3333,
+				SalePrice:        6.00,
+				OriginalWeight:   10.00,
+				SalesWeight:      3.00,
+				WasteWeight:      2,
+				DonateWeight:     0,
+				AggregateVersion: 12,
+				AggregateID:      2,
+			},
+
+			// Data: model.Inventory{
+			// 	FruitID:      1,
+			// 	RsCustomerID: "2",
+			// 	// Name:         "Test",
+			// 	Origin: "SK, Canada"
+			// 	DateArrived:       time.Now(),
+			// 	DateSold:         time.Now().Add(2),
+			// DeviceID:         4444,
+			// 	SalePrice:        3.00,
+			// 	OriginalWeight:   5.00,
+			// 	SalesWeight:      3.00,
+			// 	WasteWeight:      2000,
+			// 	DonateWeight:     10,
+			// 	AggregateVersion: 8,
+			// 	AggregateID:      1,
+			// },
+			Timestamp:   time.Now().Add(20),
+			UserID:      2,
+			UUID:        genUUID,
+			YearBucket:  2018,
+			Version:     12,
+			AggregateID: 1,
+		},
+	}
+	return m, nil
+}
+
+// func MockPastEventDataOne() (*MockEvent, error) {
+// 	genUUID, err := cql.RandomUUID()
+// 	if err != nil {
+// 		err = errors.Wrapf(err, "Error generating UUID")
+// 		return nil, err
+// 	}
+// 	m := MockEvent{
+// 		Action: "insert",
+// 		Data: model.Inventory{
+// 			FruitID:      2,
+// 			RsCustomerID: "3",
+// 			// Name:         "Test",
+// 			DateBought:       time.Now(),
+// 			DateSold:         time.Now().Add(2),
+// 			SalePrice:        3.00,
+// 			OriginalWeight:   1.00,
+// 			SalesWeight:      0.75,
+// 			WasteWeight:      0,
+// 			DonateWeight:     0,
+// 			AggregateVersion: 11,
+// 			AggregateID:      2,
+// 		},
+// 		Timestamp:   time.Now(),
+// 		UserID:      1,
+// 		UUID:        genUUID,
+// 		YearBucket:  2018,
+// 		Version:     11,
+// 		AggregateID: 1,
+// 	}
+// 	return &m, nil
+// }
+
+// func MockPastEventDataTwo() (*MockEvent, error) {
+// 	genUUID, err := cql.RandomUUID()
+// 	if err != nil {
+// 		err = errors.Wrapf(err, "Error generating UUID")
+// 		return nil, err
+// 	}
+// 	m := MockEvent{
+// 		Action: "update",
+// 		Data: model.Inventory{
+// 			FruitID:      3,
+// 			RsCustomerID: "3",
+// 			// Name:         "Test",
+// 			DateBought:       time.Now(),
+// 			DateSold:         time.Now().Add(20),
+// 			SalePrice:        6.00,
+// 			OriginalWeight:   5.00,
+// 			SalesWeight:      3.00,
+// 			WasteWeight:      2,
+// 			DonateWeight:     0,
+// 			AggregateVersion: 12,
+// 			AggregateID:      2,
+// 		},
+// 		Timestamp:   time.Now().Add(20),
+// 		UserID:      2,
+// 		UUID:        genUUID,
+// 		YearBucket:  2018,
+// 		Version:     12,
+// 		AggregateID: 1,
+// 	}
+// 	return &m, nil
+// }

@@ -1,6 +1,7 @@
 package events
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -21,32 +22,16 @@ type dataStruct struct {
 	AggregateID      int64
 }
 
-func GetVersion(csTable *cs.Table, metaVersion int64) (int64, error) {
-	// csTable, err := initCassandra()
-	// if err != nil {
-	// 	err = errors.Wrap(err, "Cassandra table not initialized")
-	// 	return 0, err
-	// }
-
+func GetVersion(metaVersion int64) (int64, error) {
 	eventInfo := []model.EventStoreMeta{
 		model.EventStoreMeta{
 			AggregateVersion: metaVersion,
 		},
 	}
-
 	//Update Version
-	newVersion := eventInfo[0].AggregateVersion + 1
+	eventInfo[0].AggregateVersion++
 
-	//Adding newVersion to eventInfo
-	eventInfo[0].AggregateVersion = newVersion
-
-	// err := <-csTable.AsyncInsert(eventInfo[0])
-	// if err != nil {
-	// 	err = errors.Wrap(err, "Error updating event info for Aggregate")
-	// 	return 0, err
-	// }
-	// return eventInfo[0].AggregateVersion, nil
-	return newVersion - 1, nil
+	return eventInfo[0].AggregateVersion - 1, nil
 }
 
 func IsAggOutOfSync(eventVersion int64, aggVersion int64) bool {
@@ -101,5 +86,32 @@ func GetAllPastEvents(aggVersion int64, metaVersion int64, t *cs.Table) {
 	} else {
 		log.Println("Printing Fetched Data:")
 		log.Println(fetched)
+	}
+}
+
+//mock event in - need to change it
+func AggOperations(event MockEvent) {
+	switch event.Action {
+	case "insert":
+		aggOp, err := InsertAgg(event.Data)
+		if err != nil {
+			err = errors.Wrap(err, "Unable to Insert to mongo")
+			log.Println(err)
+		}
+		fmt.Println("Insert:", aggOp)
+	case "update":
+		aggOp, err := UpdateAgg(event.Data)
+		if err != nil {
+			err = errors.Wrap(err, "Unable to Update mongo")
+			log.Println(err)
+		}
+		fmt.Println("Update: ", aggOp)
+	case "delete":
+		aggOp, err := DeleteAgg(event.Data)
+		if err != nil {
+			err = errors.Wrap(err, "Unable to Update mongo")
+			log.Println(err)
+		}
+		fmt.Println("Delete", aggOp)
 	}
 }
