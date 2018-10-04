@@ -24,34 +24,9 @@
 #   go-tests = true
 #   unused-packages = true
 
-
-[[constraint]]
-  name = "github.com/TerrexTech/go-cassandrautils"
-  version = "1.1.2"
-
-[[constraint]]
-  name = "github.com/TerrexTech/go-commonutils"
-  version = "1.0.0"
-
-[[constraint]]
-  name = "github.com/TerrexTech/go-mongoutils"
-  version = "1.0.0"
-
-[[constraint]]
-  branch = "master"
-  name = "github.com/gocql/gocql"
-
-[[constraint]]
-  name = "github.com/joho/godotenv"
-  version = "1.2.0"
-
-[[constraint]]
-  name = "github.com/mongodb/mongo-go-driver"
-  version = "0.0.12"
-
-[[constraint]]
-  name = "github.com/pkg/errors"
-  version = "0.8.0"
+[[override]]
+  source = "https://github.com/fsnotify/fsnotify/archive/v1.4.7.tar.gz"
+  name = "gopkg.in/fsnotify.v1"
 
 [prune]
   go-tests = true

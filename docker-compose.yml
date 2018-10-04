@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  go-eventstore-query:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        SOURCE_REPO: go-agg-inventory-v2
+
+  go-inventory:
+    image: go-agg-inventory-v2_go-eventstore-query
+
