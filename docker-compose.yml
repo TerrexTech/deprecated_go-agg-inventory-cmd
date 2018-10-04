@@ -6,8 +6,8 @@ services:
       context: ./
       dockerfile: Dockerfile
       args:
-        SOURCE_REPO: go-agg-inventory-v2
+        SOURCE_REPO: go-agg-inventory-cmd
 
   go-inventory:
-    image: go-agg-inventory-v2_go-eventstore-query
+    image: go-agg-inventory-cmd_go-eventstore-query
 

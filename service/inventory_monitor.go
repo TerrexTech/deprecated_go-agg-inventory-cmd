@@ -8,8 +8,8 @@ package service
 // 	"net/http"
 // 	"time"
 
-// 	"github.com/bhupeshbhatia/go-agg-inventory-v2/connectDB"
-// 	"github.com/bhupeshbhatia/go-agg-inventory-v2/model"
+// 	"github.com/TerrexTech/go-agg-inventory-cmd/connectDB"
+// 	"github.com/TerrexTech/go-agg-inventory-cmd/model"
 // 	"github.com/mongodb/mongo-go-driver/bson"
 // 	"github.com/pkg/errors"
 // )

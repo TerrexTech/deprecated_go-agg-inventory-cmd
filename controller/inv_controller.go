@@ -6,8 +6,8 @@ package controller
 // 	"log"
 
 // 	mongo "github.com/TerrexTech/go-mongoutils/mongo"
-// 	"github.com/bhupeshbhatia/go-agg-inventory-v2/connectDB"
-// 	"github.com/bhupeshbhatia/go-agg-inventory-v2/model"
+// 	"github.com/TerrexTech/go-agg-inventory-cmd/connectDB"
+// 	"github.com/TerrexTech/go-agg-inventory-cmd/model"
 // 	mgo "github.com/mongodb/mongo-go-driver/mongo"
 // 	"github.com/pkg/errors"
 // )

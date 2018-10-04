@@ -2,12 +2,12 @@
 
 
 [[projects]]
-  digest = "1:aef23e9ea9f154b965b9792e32c86f315c2c689883ead4eeca8a182f6edfdfbc"
+  digest = "1:6981402aef27693f4b2ec619117abd263fde29f8c1dfac46eef0f35038d37513"
   name = "github.com/Shopify/sarama"
   packages = ["."]
   pruneopts = "UT"
-  revision = "a6144ae922fd99dd0ea5046c8137acfb7fab0914"
-  version = "v1.18.0"
+  revision = "ec843464b50d4c8b56403ec9d589cf41ea30e722"
+  version = "v1.19.0"
 
 [[projects]]
   digest = "1:dcade65c88d17fe1841540f1f1f841941cf11f153a26fad02451f263a71490f1"
@@ -61,12 +61,11 @@
   version = "v2.1.15"
 
 [[projects]]
-  branch = "master"
-  digest = "1:5e33f17a0345f8ff94763b128e790293c0d5b060d57a32aadfcc23fd51a619fa"
+  digest = "1:35ac403a135b8a138870950720be1f0399e0a48387d4b5cca841b0ed8cf7a40b"
   name = "github.com/buger/jsonparser"
   packages = ["."]
   pruneopts = "UT"
-  revision = "6acdf747ae99cad92d1e8134606008acaca71844"
+  revision = "2cac668e8456b4284edb0715e17e2af02d3ec993"
 
 [[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
@@ -101,16 +100,16 @@
   version = "v1.1.0"
 
 [[projects]]
-  digest = "1:586ea76dbd0374d6fb649a91d70d652b7fe0ccffb8910a77468e7702e7901f3d"
+  digest = "1:c4a2528ccbcabf90f9f3c464a5fc9e302d592861bbfd0b7135a7de8a943d0406"
   name = "github.com/go-stack/stack"
   packages = ["."]
   pruneopts = "UT"
-  revision = "2fee6af1a9795aafbe0253a0cfbdf668e1fb8a9a"
-  version = "v1.8.0"
+  revision = "259ab82a6cad3992b4e21ff5cac294ccb06474bc"
+  version = "v1.7.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:4983e4c61e3eba9414809b35c44efa9e46ca329a745a307ae36ef60898b242ca"
+  digest = "1:19726fa0b3901c319f9c8db5c880e2d8b131986a6eacb47101e416b57c22ffb0"
   name = "github.com/gocql/gocql"
   packages = [
     ".",
@@ -119,7 +118,7 @@
     "internal/streams",
   ]
   pruneopts = "UT"
-  revision = "843d9a6e022dbaafac6ddedfcb88c3a9e48b960b"
+  revision = "7ce14ecfedc6040abe54bd0a1dfaed2cf283e0a0"
 
 [[projects]]
   digest = "1:ce579162ae1341f3e5ab30c0dce767f28b1eb6a81359aad01723f1ba6b4becdf"
@@ -138,22 +137,6 @@
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
-  digest = "1:c79fb010be38a59d657c48c6ba1d003a8aa651fa56b579d959d74573b7dff8e1"
-  name = "github.com/gorilla/context"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
-  version = "v1.1.1"
-
-[[projects]]
-  digest = "1:e73f5b0152105f18bc131fba127d9949305c8693f8a762588a82a48f61756f5f"
-  name = "github.com/gorilla/mux"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "e3702bed27f0d39777b0b37b664b6280e8ef8fbf"
-  version = "v1.6.2"
-
-[[projects]]
   branch = "master"
   digest = "1:364b908b9b27b97ab838f2f6f1b1f46281fa29b978a037d72a9b1d4f6d940190"
   name = "github.com/hailocab/go-hostpool"
@@ -162,7 +145,8 @@
   revision = "e80d13ce29ede4452c43dea11e79b9bc8a15b478"
 
 [[projects]]
-  digest = "1:a1038ef593beb4771c8f0f9c26e8b00410acd800af5c6864651d9bf160ea1813"
+  branch = "master"
+  digest = "1:59392ed8afb901aab4287d4894df8191722e34f3957716f4350c8c133ce99046"
   name = "github.com/hpcloud/tail"
   packages = [
     ".",
@@ -172,8 +156,7 @@
     "winfile",
   ]
   pruneopts = "UT"
-  revision = "a30252cb686a21eb2d0b98132633053ec2f7f1e5"
-  version = "v1.0.0"
+  revision = "a1dbeea552b7c8df4b542c66073e393de198a800"
 
 [[projects]]
   digest = "1:ecd9aa82687cf31d1585d4ac61d0ba180e42e8a6182b85bd785fcca8dfeefc1b"
@@ -184,10 +167,11 @@
   version = "v1.3.0"
 
 [[projects]]
-  digest = "1:ca4fde30b33f3f8d39ddaa544308b4bdaac1c48f290d6d5148565ff0b03a7d80"
+  digest = "1:bf8079a82a9d26fbfe7ea6b886878b0f3d8d00b174e364b024ca5c50e59c8d92"
   name = "github.com/mongodb/mongo-go-driver"
   packages = [
     "bson",
+    "bson/bsoncodec",
     "bson/builder",
     "bson/decimal",
     "bson/elements",
@@ -240,8 +224,8 @@
     "mongo/updateopt",
   ]
   pruneopts = "UT"
-  revision = "e9228a40a480a5403b7256fb755ab000ff754c35"
-  version = "v0.0.14"
+  revision = "71de844febff6ac5b6fc6ba165e24e9677d2ee05"
+  version = "v0.0.15"
 
 [[projects]]
   digest = "1:42e29deef12327a69123b9cb2cb45fee4af5c12c2a23c6e477338279a052703f"
@@ -319,28 +303,19 @@
   revision = "e2704e165165ec55d062f5919b4b29494e9fa790"
 
 [[projects]]
-  digest = "1:d688f4ad71b5dfad95c2d74cb0feac09f8f3c32ae5cecc078230dbdeece39e53"
-  name = "github.com/urfave/negroni"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "c6a59be0ce122566695fbd5e48a77f8f10c8a63a"
-  version = "v1.0.0"
-
-[[projects]]
-  branch = "master"
-  digest = "1:40fdfd6ab85ca32b6935853bbba35935dcb1d796c8135efd85947566c76e662e"
+  digest = "1:8e214e348491ae6a1a79c5bb728ed4eca7f1a2892cd66ad11f46558d684333f4"
   name = "github.com/xdg/scram"
   packages = ["."]
   pruneopts = "UT"
-  revision = "7eeb5667e42c09cb51bf7b7c28aea8c56767da90"
+  revision = "b32d4bd2c91c5a4f0ea2a230da4350051b5fb5b0"
 
 [[projects]]
-  digest = "1:577b99fc55ee19cbf1ffd072808c91ced78cd732bd9d0517bec9b90e532069cb"
+  branch = "master"
+  digest = "1:f5c1d04bc09c644c592b45b9f0bad4030521b1a7d11c7dadbb272d9439fa6e8e"
   name = "github.com/xdg/stringprep"
   packages = ["."]
   pruneopts = "UT"
-  revision = "bd625b8dc1e3b0f57412280ccbcc317f0c69d8db"
-  version = "v1.0.0"
+  revision = "73f8eece6fdcd902c185bf651de50f3828bed5ed"
 
 [[projects]]
   branch = "master"
@@ -348,11 +323,11 @@
   name = "golang.org/x/crypto"
   packages = ["pbkdf2"]
   pruneopts = "UT"
-  revision = "0e37d006457bf46f9e6692014ba72ef82c33022c"
+  revision = "e3636079e1a4c1f337f212cc5cd2aca108f6c900"
 
 [[projects]]
   branch = "master"
-  digest = "1:675d80f182eb6dc845363f5f6f29159c95ec84ce645b9bb15d05ae19b2afd5c8"
+  digest = "1:6d5ed712653ea5321fe3e3475ab2188cf362a4e0d31e9fd3acbd4dfbbca0d680"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -361,23 +336,22 @@
     "html/charset",
   ]
   pruneopts = "UT"
-  revision = "4dfa2610cdf3b287375bbba5b8f2a14d3b01d8de"
+  revision = "68fc911561ed0cb104e22deafa05515909b706ab"
 
 [[projects]]
-  branch = "master"
   digest = "1:e0140c0c868c6e0f01c0380865194592c011fe521d6e12d78bfd33e756fe018a"
   name = "golang.org/x/sync"
   packages = ["semaphore"]
   pruneopts = "UT"
-  revision = "1d60e4601c6fd243af51cc01ddf169918a5407ca"
+  revision = "fd80eb99c8f653c847d294a001bdf2a3a6f768f5"
 
 [[projects]]
   branch = "master"
-  digest = "1:d40e62a7b8e72fdc18e22ceddd3e6025e1d96f228b9a286abf3d3bd96d7d7a51"
+  digest = "1:f7e5d74f094d44e931785fc1ebc887704953b6689c7d47fce9ff1a8647b83eb6"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "c2ed4eda69e7f62900806e4cd6e45f0429f859fa"
+  revision = "8469e314837c2e2471561de5c47bbf8bfd0d9099"
 
 [[projects]]
   digest = "1:4392fcf42d5cf0e3ff78c96b2acf8223d49e4fdc53eb77c99d2f8dfe4680e006"
@@ -410,11 +384,10 @@
 
 [[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
-  name = "gopkg.in/fsnotify.v1"
+  name = "gopkg.in/fsnotify/fsnotify.v1"
   packages = ["."]
   pruneopts = "UT"
   revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
-  source = "https://github.com/fsnotify/fsnotify/archive/v1.4.7.tar.gz"
   version = "v1.4.7"
 
 [[projects]]
@@ -426,12 +399,11 @@
   version = "v0.9.1"
 
 [[projects]]
-  branch = "v1"
-  digest = "1:0caa92e17bc0b65a98c63e5bc76a9e844cd5e56493f8fdbb28fad101a16254d9"
+  digest = "1:3c839a777de0e6da035c9de900b60cbec463b0a89351192c1ea083eaf9e0fce0"
   name = "gopkg.in/tomb.v1"
   packages = ["."]
   pruneopts = "UT"
-  revision = "dd632973f1e7218eb1089048e0798ec9ae7dceb8"
+  revision = "c131134a1947e9afd9cecfe11f4c6dff0732ae58"
 
 [[projects]]
   digest = "1:342378ac4dcb378a5448dd723f0784ae519383532f5e70ade24132c4c8693202"
@@ -446,19 +418,19 @@
   analyzer-version = 1
   input-imports = [
     "github.com/Shopify/sarama",
+    "github.com/TerrexTech/go-commonutils/commonutil",
     "github.com/TerrexTech/go-eventstore-models/model",
     "github.com/TerrexTech/go-kafkautils/consumer",
     "github.com/TerrexTech/go-kafkautils/producer",
     "github.com/TerrexTech/go-mongoutils/mongo",
     "github.com/TerrexTech/uuuid",
-    "github.com/gorilla/mux",
     "github.com/joho/godotenv",
     "github.com/mongodb/mongo-go-driver/bson",
     "github.com/mongodb/mongo-go-driver/bson/objectid",
+    "github.com/mongodb/mongo-go-driver/mongo",
     "github.com/onsi/ginkgo",
     "github.com/onsi/gomega",
     "github.com/pkg/errors",
-    "github.com/urfave/negroni",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1

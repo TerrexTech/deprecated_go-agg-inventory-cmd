@@ -4,7 +4,7 @@ import (
 	"os"
 
 	mongo "github.com/TerrexTech/go-mongoutils/mongo"
-	"github.com/bhupeshbhatia/go-agg-inventory-v2/model"
+	"github.com/TerrexTech/go-agg-inventory-cmd/model"
 	"github.com/pkg/errors"
 )
 

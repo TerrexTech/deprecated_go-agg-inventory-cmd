@@ -1,4 +1,4 @@
-# go-agg-inventory-v2
+# go-agg-inventory-cmd
 Mongo aggregate with Custom time - need to divide into cmd and query
 
 #### Steps to run mongo
@@ -19,6 +19,6 @@ Mongo aggregate with Custom time - need to divide into cmd and query
     * db.users.find()
     * db.dropDatabase()
 
-### After that run go-agg-inventory-v2
+### After that run go-agg-inventory-cmd
 * Look at main file --- the router.HandleFunc tell you routes that I am using.
 * You can connect your front-end to this by using the URL: localhost:8080/name of route
